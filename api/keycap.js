@@ -29,9 +29,12 @@ module.exports = async function handler(req, res) {
   }
   if (!body || typeof body !== "object") body = {};
 
-  const key = String(body.key || "").trim().toUpperCase();
-  if (!/^[A-Z0-9]$/.test(key)) {
-    return res.status(400).json({ error: "Phím không hợp lệ — chỉ một chữ cái hoặc chữ số." });
+  // Chấp nhận mọi phím trên bàn phím: ký tự in được (A, 1, /) hoặc tên phím đặc biệt
+  // đã chuẩn hoá từ client (ENTER, ESCAPE, DELETE, ARROWUP, SPACE…). Chỉ chặn ký tự
+  // điều khiển và độ dài bất thường.
+  const key = String(body.key || "").trim().toUpperCase().slice(0, 24);
+  if (!/^[^\x00-\x1F\x7F]{1,24}$/.test(key)) {
+    return res.status(400).json({ error: "Phím không hợp lệ." });
   }
 
   const record = {

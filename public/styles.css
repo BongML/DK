@@ -98,11 +98,24 @@ input[type=text]:focus,input[type=password]:focus{
 }
 #user{text-transform:uppercase;letter-spacing:.22em}
 #pass{letter-spacing:.3em}
-#keycap{
-  text-transform:uppercase;text-align:center;
-  font-size:26px;font-weight:600;letter-spacing:0;padding:16px;
+/* nút bắt phím: bấm thẳng phím nào cũng ghi nhận, kể cả Enter/Esc/Delete */
+.capture{
+  width:100%;margin-top:0;padding:16px;min-height:60px;
+  color:var(--muted);background:rgba(0,0,0,.28);
+  border:1px solid var(--line);border-radius:11px;cursor:pointer;
+  font:inherit;font-size:16px;font-weight:500;text-transform:none;
+  box-shadow:none;
+  transition:border-color .18s,box-shadow .18s,background .18s,color .18s;
 }
-#keycap::placeholder{letter-spacing:0}
+.capture:hover{filter:none}
+.capture.armed{
+  border-color:rgba(124,140,255,.7);background:rgba(0,0,0,.36);
+  box-shadow:0 0 0 3px rgba(124,140,255,.16);color:var(--text);
+}
+.capture.has-key{
+  color:var(--text);text-transform:uppercase;letter-spacing:.12em;
+  font-size:22px;font-weight:600;
+}
 
 button{
   width:100%;margin-top:12px;padding:13px;font:inherit;font-size:15px;font-weight:600;

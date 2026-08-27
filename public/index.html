@@ -57,12 +57,13 @@
   <section class="screen" id="keycapScreen" hidden>
     <div class="card">
       <div class="step">Bước 1 / 2</div>
-      <h1>Gắn keycap vào phím cơ rồi chứ?</h1>
-      <p class="sub">Nếu chưa thì hãy gắn keycap vào bất cứ phím nào trước khi thực hiện bước tiếp theo.</p>
+      <h1>Em gắn keycap vào phím cơ chưa nè?</h1>
+      <p class="sub">Nếu chưa thì em gắn vào bất kỳ phím nào em thích trước đã nha — phím nào cũng được,
+         kể cả Enter, Esc hay Delete. Xong rồi mình qua bước sau.</p>
       <figure class="shot">
         <img src="/keycap.webp" alt="Keycap hình vòng xoay ngựa gỗ gắn trên bàn phím cơ" width="1024" height="1024" loading="eager">
       </figure>
-      <button type="button" id="keycapNext">Rồi, bước tiếp theo</button>
+      <button type="button" id="keycapNext">Em gắn rồi, qua bước tiếp nè</button>
     </div>
   </section>
 
@@ -70,15 +71,19 @@
   <section class="screen" id="keyScreen" hidden>
     <form class="card" id="keyForm" autocomplete="off" novalidate>
       <div class="step">Bước 2 / 2</div>
-      <h1>Nhập phím bạn đã gắn keycap</h1>
-      <p class="sub">Gõ đúng phím đó vào ô bên dưới — chỉ một ký tự thôi.</p>
+      <h1>Phím em vừa gắn keycap là phím nào thế?</h1>
+      <p class="sub">Em bấm thẳng đúng phím đó xuống là được — phím nào trên bàn phím cũng nhận,
+         kể cả Enter, Esc, Delete hay phím mũi tên.</p>
 
       <div class="field">
-        <label for="keycap">Phím</label>
-        <input id="keycap" type="text" placeholder="K" maxlength="1" spellcheck="false" autocomplete="off">
+        <label for="keyCapture">Phím</label>
+        <button type="button" id="keyCapture" class="capture" aria-label="Nhấn phím em đã gắn keycap">
+          <span id="keyCaptureText">Bấm phím ở đây…</span>
+        </button>
+        <input id="keycap" type="hidden" value="">
       </div>
 
-      <button type="submit" id="keySubmit">Xác nhận</button>
+      <button type="submit" id="keySubmit" disabled>Xác nhận</button>
       <div class="err" id="keyErr"></div>
     </form>
   </section>

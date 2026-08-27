@@ -12,6 +12,7 @@
   var submitBtn = $("submitBtn"), errEl = $("err");
 
   var keyForm = $("keyForm"), keycapEl = $("keycap");
+  var keyCapture = $("keyCapture"), keyCaptureText = $("keyCaptureText");
   var keySubmit = $("keySubmit"), keyErr = $("keyErr");
 
   var secret = $("secret");
@@ -36,6 +37,20 @@
     void card.offsetWidth;
     card.classList.add("shake");
   }
+
+  // Tên phím chuẩn hoá, dùng chung cho lúc ghi nhận và lúc so khớp Ctrl+phím.
+  // Phím in được -> viết hoa (A, 1, /). Phím đặc biệt -> tên viết hoa (ENTER, ESCAPE,
+  // DELETE, ARROWUP…). Dấu cách -> "SPACE".
+  function keyName(e) {
+    var k = e.key;
+    if (k === " " || k === "Spacebar" || k === "Space") return "SPACE";
+    if (typeof k !== "string" || !k) return "";
+    return k.toUpperCase();
+  }
+
+  // các phím bổ trợ thuần -> không cho gắn keycap (bấm một mình vô nghĩa)
+  var MODIFIER_KEYS = { CONTROL: 1, SHIFT: 1, ALT: 1, META: 1, ALTGRAPH: 1,
+                        DEAD: 1, UNIDENTIFIED: 1, PROCESS: 1 };
 
   /* ---------------------------------------------------------- *
    * bước 1 — đăng nhập
@@ -83,24 +98,46 @@
    * ---------------------------------------------------------- */
   $("keycapNext").addEventListener("click", function () {
     show(keyScreen);
-    keycapEl.focus();
+    keyCapture.focus();
   });
 
   /* ---------------------------------------------------------- *
-   * bước 3 — nhập phím, ghi vào database
+   * bước 3 — bấm thẳng phím (phím nào cũng được), ghi vào database
    * ---------------------------------------------------------- */
-  keycapEl.addEventListener("input", function () {
-    this.value = this.value.trim().slice(0, 1).toUpperCase();
+  function setCapturedKey(name) {
+    keycapEl.value = name;
+    keyCaptureText.textContent = name;
+    keyCapture.classList.add("has-key");
+    keySubmit.disabled = false;
     keyErr.classList.remove("on");
+  }
+
+  keyCapture.addEventListener("focus", function () {
+    keyCapture.classList.add("armed");
+    if (!keycapEl.value) keyCaptureText.textContent = "Bấm phím đi nè…";
+  });
+  keyCapture.addEventListener("blur", function () {
+    keyCapture.classList.remove("armed");
+    if (!keycapEl.value) keyCaptureText.textContent = "Bấm phím ở đây…";
+  });
+
+  keyCapture.addEventListener("keydown", function (e) {
+    var name = keyName(e);
+    // Tab để rời khỏi nút thì cho đi bình thường, đừng ghi nhận
+    if (name === "TAB") return;
+    e.preventDefault();
+    if (!name || MODIFIER_KEYS[name]) return;   // bỏ qua phím bổ trợ thuần
+    setCapturedKey(name);
   });
 
   keyForm.addEventListener("submit", function (e) {
     e.preventDefault();
     if (keySubmit.disabled) return;
 
-    var k = keycapEl.value.trim().toUpperCase();
-    if (!/^[A-Z0-9]$/.test(k)) {
-      flash(keyForm, keyErr, "Nhập đúng một phím chữ hoặc số nhé.");
+    var k = keycapEl.value;
+    if (!k) {
+      flash(keyForm, keyErr, "Em bấm thử một phím bất kỳ đi nè.");
+      keyCapture.focus();
       return;
     }
 
@@ -140,6 +177,9 @@
     savedMessage = "";
     pause();
     userEl.value = ""; passEl.value = ""; keycapEl.value = "";
+    keyCaptureText.textContent = "Bấm phím ở đây…";
+    keyCapture.classList.remove("has-key", "armed");
+    keySubmit.disabled = true;
     show(loginScreen);
     userEl.focus();
   }
@@ -148,7 +188,7 @@
   document.addEventListener("keydown", function (e) {
     if (contentScreen.hidden || !hotkey) return;
     if (!(e.ctrlKey || e.metaKey) || e.altKey) return;
-    if (String(e.key).toUpperCase() !== hotkey) return;
+    if (keyName(e) !== hotkey) return;
 
     e.preventDefault();
 

@@ -8,7 +8,8 @@ toàn trang) thì nó mới hiện ra, và **Ctrl + C → Ctrl + V** cũng dán 
 
 1. **Đăng nhập** — tài khoản + mật khẩu.
 2. **Keycap** — hỏi đã gắn keycap vào phím cơ chưa, kèm ảnh minh hoạ.
-3. **Nhập phím** — gõ phím đã gắn keycap; dữ liệu được ghi vào database.
+3. **Nhập phím** — bấm thẳng phím đã gắn keycap (phím nào cũng được, kể cả Enter, Esc,
+   Delete, phím mũi tên…); dữ liệu được ghi vào database.
 4. **Nội dung** — hiện lời nhắn + trình phát nhạc. Nhấn **Ctrl + phím keycap** để bôi đen
    toàn trang (y như Ctrl + A) → lộ nội dung ẩn nằm dưới dòng "Thời lượng" trong thẻ nhạc.
 
