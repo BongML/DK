@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>·</title>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="mask-icon" href="/favicon.svg" color="#7c8cff">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,500;1,500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+
+<div class="glow a"></div>
+<div class="glow b"></div>
+<div class="grain"></div>
+
+<div class="stage">
+
+  <!-- ============ BƯỚC 1 — ĐĂNG NHẬP ============ -->
+  <section class="screen" id="loginScreen">
+    <form class="card" id="loginForm" autocomplete="off" novalidate>
+      <div class="mark">
+        <svg viewBox="0 0 64 64" role="img" aria-label="Cáo">
+          <g fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M17 27 10 9l17 8Z"/>
+            <path d="M47 27 54 9l-17 8Z"/>
+            <path d="M16 26q16-6 32 0c2 11-4 20-16 26-12-6-18-15-16-26Z"/>
+          </g>
+          <circle cx="25" cy="33" r="2.4" fill="currentColor"/>
+          <circle cx="39" cy="33" r="2.4" fill="currentColor"/>
+          <path d="M28.6 41.5h6.8L32 46Z" fill="currentColor"/>
+        </svg>
+      </div>
+      <h1>Chào mừng trở lại</h1>
+      <p class="sub">Đăng nhập để xem nội dung dành riêng cho bạn.</p>
+
+      <div class="field">
+        <label for="user">Tài khoản</label>
+        <input id="user" type="text" placeholder="XX" maxlength="2" spellcheck="false" autocomplete="off">
+      </div>
+
+      <div class="field">
+        <label for="pass">Mật khẩu</label>
+        <input id="pass" type="password" inputmode="numeric" placeholder="xxxx" maxlength="4" autocomplete="off">
+      </div>
+
+      <button type="submit" id="submitBtn">Đăng nhập</button>
+      <div class="err" id="err"></div>
+    </form>
+  </section>
+
+  <!-- ============ BƯỚC 2 — KEYCAP ============ -->
+  <section class="screen" id="keycapScreen" hidden>
+    <div class="card">
+      <div class="step">Bước 1 / 2</div>
+      <h1>Gắn keycap vào phím cơ rồi chứ?</h1>
+      <p class="sub">Nếu chưa thì hãy gắn keycap vào bất cứ phím nào trước khi thực hiện bước tiếp theo.</p>
+      <figure class="shot">
+        <img src="/keycap.webp" alt="Keycap hình vòng xoay ngựa gỗ gắn trên bàn phím cơ" width="1024" height="1024" loading="eager">
+      </figure>
+      <button type="button" id="keycapNext">Rồi, bước tiếp theo</button>
+    </div>
+  </section>
+
+  <!-- ============ BƯỚC 3 — NHẬP PHÍM ============ -->
+  <section class="screen" id="keyScreen" hidden>
+    <form class="card" id="keyForm" autocomplete="off" novalidate>
+      <div class="step">Bước 2 / 2</div>
+      <h1>Nhập phím bạn đã gắn keycap</h1>
+      <p class="sub">Gõ đúng phím đó vào ô bên dưới — chỉ một ký tự thôi.</p>
+
+      <div class="field">
+        <label for="keycap">Phím</label>
+        <input id="keycap" type="text" placeholder="K" maxlength="1" spellcheck="false" autocomplete="off">
+      </div>
+
+      <button type="submit" id="keySubmit">Xác nhận</button>
+      <div class="err" id="keyErr"></div>
+    </form>
+  </section>
+
+  <!-- ============ BƯỚC 4 — NỘI DUNG ============ -->
+  <section class="screen wide" id="contentScreen" hidden>
+
+    <div class="unlocked">
+      <div class="eyebrow">Đã mở khoá</div>
+      <h2>Có một lời nhắn <em>chưa nói thành lời</em></h2>
+      <div class="rule"></div>
+      <p>Nó vẫn ở đây, ngay trên trang này — chỉ là chưa hiện ra thôi.<br>
+         Thử nhấn <kbd>Ctrl</kbd> + <kbd id="hintKey">?</kbd> xem sao.</p>
+    </div>
+
+    <!-- ---------- player ---------- -->
+    <div class="player">
+      <aside class="album">
+        <div class="cover" id="cover">
+          <img class="cover-art" src="/cover.webp" alt="Ảnh bìa Giữ Anh Cho Ngày Hôm Qua" width="300" height="300">
+          <button class="cover-play" id="coverPlay" type="button" aria-label="Phát"></button>
+        </div>
+        <h3 class="album-title">Giữ Anh Cho Ngày Hôm Qua <span>(Single)</span></h3>
+        <div class="album-meta">Hoàng Dũng</div>
+        <div class="album-meta dim">Rhymastic • Lelarec</div>
+
+        <button class="play-pill" id="playPill" type="button">
+          <span class="pill-icon" id="pillIcon"></span>
+          <span id="pillText">Phát</span>
+        </button>
+
+        <div class="album-actions">
+          <button type="button" class="round" id="likeBtn" aria-pressed="false" aria-label="Yêu thích">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.4 4.6 13a4.6 4.6 0 1 1 6.5-6.5l.9.9.9-.9A4.6 4.6 0 1 1 19.4 13z"/></svg>
+          </button>
+          <button type="button" class="round" id="loopBtn" aria-pressed="false" aria-label="Lặp lại">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M17 2l3 3-3 3"/><path d="M4 11V9a4 4 0 0 1 4-4h12"/>
+              <path d="M7 22l-3-3 3-3"/><path d="M20 13v2a4 4 0 0 1-4 4H4"/>
+            </svg>
+          </button>
+        </div>
+      </aside>
+
+      <main class="tracks">
+        <div class="tracks-head">
+          <span>Bài hát</span>
+          <span>Thời gian</span>
+        </div>
+
+        <div class="track" id="track" role="button" tabindex="0" aria-label="Phát Giữ Anh Cho Ngày Hôm Qua">
+          <div class="track-no">1</div>
+          <div class="track-thumb">
+            <img src="/cover.webp" alt="" width="44" height="44">
+            <svg viewBox="0 0 64 64" class="eq" aria-hidden="true">
+              <g class="bars">
+                <rect x="16" y="26" width="5" height="12" rx="2.5"/>
+                <rect x="25" y="18" width="5" height="28" rx="2.5"/>
+                <rect x="34" y="23" width="5" height="18" rx="2.5"/>
+                <rect x="43" y="29" width="5" height="6"  rx="2.5"/>
+              </g>
+            </svg>
+          </div>
+          <div class="track-name">
+            <strong>Giữ Anh Cho Ngày Hôm Qua</strong>
+            <span>Hoàng Dũng, Rhymastic, Lelarec</span>
+          </div>
+          <div class="track-time" id="trackTime">--:--</div>
+        </div>
+
+        <div class="seek">
+          <span class="t" id="cur">0:00</span>
+          <div class="bar" id="bar" role="slider" tabindex="0"
+               aria-label="Tua bài hát" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+            <div class="bar-fill" id="barFill"></div>
+            <div class="bar-dot" id="barDot"></div>
+          </div>
+          <span class="t" id="dur">0:00</span>
+          <div class="vol">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9h4l5-4v14l-5-4H4z"/><path d="M16.5 8.5a5 5 0 0 1 0 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            <input id="vol" type="range" min="0" max="100" value="80" aria-label="Âm lượng">
+          </div>
+        </div>
+
+        <h4 class="info-title">Thông Tin</h4>
+        <dl class="info">
+          <dt>Số bài hát</dt><dd>1</dd>
+          <dt>Nghệ sĩ</dt><dd>Hoàng Dũng, Rhymastic, Lelarec</dd>
+          <dt>Thời lượng</dt><dd id="infoDur">--:--</dd>
+        </dl>
+
+        <!-- nội dung ẩn: chữ trong suốt, chỉ hiện khi bôi đen -->
+        <div id="secret"></div>
+      </main>
+    </div>
+
+    <button class="logout" id="logout">Đăng xuất</button>
+  </section>
+
+</div>
+
+<audio id="audio" src="/giu-anh-cho-ngay-hom-qua.mp3" preload="metadata"></audio>
+<script src="/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,9 @@
+{
+  "name": "hidden-note",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Landing page có đăng nhập, nội dung ẩn chỉ hiện khi bôi đen trang.",
+  "engines": {
+    "node": ">=18"
+  }
+}
