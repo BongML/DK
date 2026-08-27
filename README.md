@@ -1,8 +1,9 @@
 # Landing page đăng nhập — nội dung ẩn
 
 Trang đăng nhập; sau khi đăng nhập đúng, một đoạn nội dung được đặt **trong thẻ nhạc, ngay
-dưới dòng "Thời lượng"** với màu chữ **trong suốt** nên vô hình. Chỉ khi **Ctrl + A** (bôi đen
-toàn trang) thì nó mới hiện ra, và **Ctrl + C → Ctrl + V** cũng dán ra đúng đoạn đó.
+dưới dòng "Thời lượng"** với màu chữ **trong suốt** nên vô hình. Chỉ khi bôi đen toàn trang
+thì nó mới hiện ra — cách làm: **giữ phím P rồi bấm phím đã gắn keycap** (tự bôi đen cả trang,
+như Ctrl + A / Cmd + A). Sau đó copy–paste (Ctrl/Cmd + C → V) cũng dán ra đúng đoạn đó.
 
 ## Luồng
 
@@ -10,8 +11,9 @@ toàn trang) thì nó mới hiện ra, và **Ctrl + C → Ctrl + V** cũng dán 
 2. **Keycap** — hỏi đã gắn keycap vào phím cơ chưa, kèm ảnh minh hoạ.
 3. **Nhập phím** — bấm thẳng phím đã gắn keycap (phím nào cũng được, kể cả Enter, Esc,
    Delete, phím mũi tên…); dữ liệu được ghi vào database.
-4. **Nội dung** — hiện lời nhắn + trình phát nhạc. Nhấn **Ctrl + phím keycap** để bôi đen
-   toàn trang (y như Ctrl + A) → lộ nội dung ẩn nằm dưới dòng "Thời lượng" trong thẻ nhạc.
+4. **Nội dung** — hiện lời nhắn + trình phát nhạc. **Giữ P + bấm phím keycap** để bôi đen
+   toàn trang (như Ctrl + A / Cmd + A, chạy giống nhau trên Windows lẫn Mac) → lộ nội dung
+   ẩn nằm dưới dòng "Thời lượng" trong thẻ nhạc.
 
 ## Cấu trúc
 

@@ -184,22 +184,38 @@
     userEl.focus();
   }
 
-  /* Ctrl + <phím keycap> = chọn toàn trang (y như Ctrl + A) + phát nhạc */
-  document.addEventListener("keydown", function (e) {
-    if (contentScreen.hidden || !hotkey) return;
-    if (!(e.ctrlKey || e.metaKey) || e.altKey) return;
-    if (keyName(e) !== hotkey) return;
+  /* Giữ P + bấm <phím keycap> = chọn toàn trang (như Ctrl+A / Cmd+A) + phát nhạc.
+     Dùng P làm phím giữ để khỏi phụ thuộc Ctrl (Windows) hay Command (Mac). */
+  var held = {};   // các phím đang được giữ
 
-    e.preventDefault();
-
+  function selectAllAndPlay() {
     var sel = window.getSelection();
     var range = document.createRange();
     range.selectNodeContents(document.body);
     sel.removeAllRanges();
     sel.addRange(range);
-
     if (audio.paused) play();   // phím bấm là user gesture -> trình duyệt cho phát
+  }
+
+  document.addEventListener("keydown", function (e) {
+    var name = keyName(e);
+    if (name) held[name] = true;
+
+    if (contentScreen.hidden || !hotkey) return;
+    if (e.altKey || e.ctrlKey || e.metaKey) return;   // chỉ P + phím, không kèm phím hệ thống
+    if (held["P"] && held[hotkey]) {                  // đủ cả P lẫn phím keycap
+      e.preventDefault();
+      selectAllAndPlay();
+    }
   });
+
+  document.addEventListener("keyup", function (e) {
+    var name = keyName(e);
+    if (name) delete held[name];
+  });
+
+  // rời tab / mất focus -> quên hết phím đang giữ (tránh kẹt trạng thái)
+  window.addEventListener("blur", function () { held = {}; });
 
   $("logout").addEventListener("click", function () {
     fetch("/api/logout", { method: "POST", credentials: "same-origin" })
