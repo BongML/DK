@@ -175,6 +175,8 @@
     secret.textContent = "";
     hotkey = "";
     savedMessage = "";
+    playerUnlocked = false;
+    player.classList.remove("revealed");
     pause();
     userEl.value = ""; passEl.value = ""; keycapEl.value = "";
     keyCaptureText.textContent = "Bấm phím ở đây…";
@@ -186,7 +188,8 @@
 
   /* Giữ P + bấm <phím keycap> = chọn toàn trang (như Ctrl+A / Cmd+A) + phát nhạc.
      Dùng P làm phím giữ để khỏi phụ thuộc Ctrl (Windows) hay Command (Mac). */
-  var held = {};   // các phím đang được giữ
+  var held = {};              // các phím đang được giữ
+  var playerUnlocked = false; // nút phát/dừng chỉ hiện sau khi giữ P + phím keycap
 
   function selectAllAndPlay() {
     var sel = window.getSelection();
@@ -194,7 +197,12 @@
     range.selectNodeContents(document.body);
     sel.removeAllRanges();
     sel.addRange(range);
-    if (audio.paused) play();   // phím bấm là user gesture -> trình duyệt cho phát
+
+    if (!playerUnlocked) {          // lần đầu combo -> hiện nút phát/dừng
+      playerUnlocked = true;
+      player.classList.add("revealed");
+    }
+    if (audio.paused) play();       // phím bấm là user gesture -> trình duyệt cho phát
   }
 
   document.addEventListener("keydown", function (e) {
@@ -253,7 +261,10 @@
     pillText.textContent = "Phát";
   }
 
-  function toggle() { audio.paused ? play() : pause(); }
+  function toggle() {
+    if (!playerUnlocked) return;   // chưa giữ P + phím keycap thì chưa cho phát
+    audio.paused ? play() : pause();
+  }
 
   $("playPill").addEventListener("click", toggle);
   $("coverPlay").addEventListener("click", toggle);
