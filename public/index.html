@@ -5,9 +5,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="noindex, nofollow">
-  <title>·</title>
+  <title>🍀</title>
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-  <link rel="mask-icon" href="/favicon.svg" color="#7c8cff">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
@@ -27,29 +26,22 @@
     <!-- ============ BƯỚC 1 — ĐĂNG NHẬP ============ -->
     <section class="screen" id="loginScreen">
       <form class="card" id="loginForm" autocomplete="off" novalidate>
-        <div class="mark">
-          <svg viewBox="0 0 64 64" role="img" aria-label="Cáo">
-            <g fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M17 27 10 9l17 8Z" />
-              <path d="M47 27 54 9l-17 8Z" />
-              <path d="M16 26q16-6 32 0c2 11-4 20-16 26-12-6-18-15-16-26Z" />
-            </g>
-            <circle cx="25" cy="33" r="2.4" fill="currentColor" />
-            <circle cx="39" cy="33" r="2.4" fill="currentColor" />
-            <path d="M28.6 41.5h6.8L32 46Z" fill="currentColor" />
-          </svg>
-        </div>
-        <h1>Chào mừng trở lại</h1>
-        <p class="sub">Đăng nhập để xem nội dung dành riêng cho bạn.</p>
+        <div class="mark"><span class="mark-emoji" role="img" aria-label="Cỏ bốn lá">🍀</span></div>
+        <h1>Chẳng có tình tiết nào lãng mạn đâu, chỉ là không thấy vui khi nói chúc em bằng lời thôi.</h1>
+        <p class="sub">Đăng nhập để xem nội dung bí mật của khứa ất ơ này.</p>
 
         <div class="field">
           <label for="user">Tài khoản</label>
-          <input id="user" type="text" placeholder="XX" maxlength="2" spellcheck="false" autocomplete="off">
+          <input id="user" type="text" placeholder="xxx" maxlength="32" spellcheck="false" autocomplete="off"
+            aria-describedby="userHint">
+          <p class="hint" id="userHint">Your Buddhist name.</p>
         </div>
 
         <div class="field">
           <label for="pass">Mật khẩu</label>
-          <input id="pass" type="password" inputmode="numeric" placeholder="xxxx" maxlength="4" autocomplete="off">
+          <input id="pass" type="password" placeholder="xxxx" maxlength="64" spellcheck="false"
+            autocapitalize="off" autocorrect="off" autocomplete="off" aria-describedby="passHint">
+          <p class="hint" id="passHint">The first 7 lowercase characters in the song ‘Keep Me for Yesterday’.</p>
         </div>
 
         <button type="submit" id="submitBtn">Đăng nhập</button>

@@ -55,10 +55,6 @@
   /* ---------------------------------------------------------- *
    * bước 1 — đăng nhập
    * ---------------------------------------------------------- */
-  passEl.addEventListener("input", function () {
-    this.value = this.value.replace(/\D/g, "").slice(0, 4);
-  });
-
   [userEl, passEl].forEach(function (el) {
     el.addEventListener("input", function () { errEl.classList.remove("on"); });
   });
