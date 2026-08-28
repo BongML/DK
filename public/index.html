@@ -39,8 +39,8 @@
 
         <div class="field">
           <label for="pass">Mật khẩu</label>
-          <input id="pass" type="password" placeholder="xxxx" maxlength="64" spellcheck="false"
-            autocapitalize="off" autocorrect="off" autocomplete="off" aria-describedby="passHint">
+          <input id="pass" type="password" placeholder="xxxx" maxlength="64" spellcheck="false" autocapitalize="off"
+            autocorrect="off" autocomplete="off" aria-describedby="passHint">
           <p class="hint" id="passHint">The first 7 lowercase characters in the song ‘Keep Me for Yesterday’.</p>
         </div>
 
@@ -53,9 +53,8 @@
     <section class="screen" id="keycapScreen" hidden>
       <div class="card">
         <div class="step">Bước 1 / 2</div>
-        <h1>Em gắn keycap vào phím cơ chưa á?</h1>
-        <p class="sub">Nếu chưa thì em gắn vào bất kỳ phím nào em thích trước đã— phím nào cũng được. Xong rồi mình qua
-          bước sau.</p>
+        <h1>Đây là keycap may mắn.</h1>
+        <p class="sub">Nếu em gỡ một phím trên bàn phím cơ của em để bỏ keycap này vào thì đó sẽ là phím nào?</p>
         <figure class="shot">
           <img src="/keycap.webp" alt="Keycap hình vòng xoay ngựa gỗ gắn trên bàn phím cơ" width="1024" height="1024"
             loading="eager">
@@ -68,10 +67,10 @@
     <section class="screen" id="keyScreen" hidden>
       <form class="card" id="keyForm" autocomplete="off" novalidate>
         <div class="step">Bước 2 / 2</div>
-        <h1>Nhập phím em vừa gắn keycap ở đây.</h1>
+        <h1>Nhập phím em muốn gắn keycap ở đây.</h1>
         <div class="field">
           <label for="keyCapture">Phím</label>
-          <button type="button" id="keyCapture" class="capture" aria-label="Nhấn phím em đã gắn keycap">
+          <button type="button" id="keyCapture" class="capture" aria-label="Nhấn phím em gắn keycap">
             <span id="keyCaptureText">Bấm phím ở đây…</span>
           </button>
           <input id="keycap" type="hidden" value="">
